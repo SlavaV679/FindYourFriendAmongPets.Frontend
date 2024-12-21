@@ -1,13 +1,12 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.tsx";
-import ButtonAppBar from "./components/ButtonAppBar.tsx";
 import { ThemeProvider } from "@emotion/react";
 import { customTheme } from "./theme.ts";
+import { RouterProvider } from "react-router-dom";
+import { Router } from "./components/router.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <ThemeProvider theme={customTheme}>
-    <ButtonAppBar />
-    <App />
+    <RouterProvider router={Router} />
   </ThemeProvider>
 );
