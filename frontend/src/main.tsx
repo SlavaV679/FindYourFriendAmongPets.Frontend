@@ -1,10 +1,12 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.tsx";
+import { ThemeProvider } from "@emotion/react";
+import { customTheme } from "./theme.ts";
+import { RouterProvider } from "react-router-dom";
+import { Router } from "./components/router.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+  <ThemeProvider theme={customTheme}>
+    <RouterProvider router={Router} />
+  </ThemeProvider>
 );
