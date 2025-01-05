@@ -1,4 +1,4 @@
-import { AppBar, Button } from "@mui/material";
+import { AppBar } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 export default function HeaderNavigation() {
@@ -19,7 +19,9 @@ export default function HeaderNavigation() {
             Help animals
           </NavLink>
         </div>
-        <Button color="inherit">Login</Button>
+        <NavLink color="inherit" to={"/login"}>
+          Login
+        </NavLink>
       </div>
     </AppBar>
   );
