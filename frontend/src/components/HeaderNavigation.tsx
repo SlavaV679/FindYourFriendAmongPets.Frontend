@@ -1,7 +1,10 @@
-import { AppBar } from "@mui/material";
+import { AppBar, Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../contexts/auth/useAuth";
 
 export default function HeaderNavigation() {
+  const { accessToken, logout } = useAuth();
+
   return (
     <AppBar position="static">
       <div className="flex flex-row items-center justify-between py-2 px-3">
@@ -19,9 +22,19 @@ export default function HeaderNavigation() {
             Help animals
           </NavLink>
         </div>
-        <NavLink color="inherit" to={"/login"}>
-          Login
-        </NavLink>
+
+        <div className="flex flex-row gap-3">
+          {accessToken ? (
+            <>
+              <NavLink to={"/profile"}>Profile</NavLink>
+              <Button onClick={() => logout()} color="inherit">
+                Logount
+              </Button>
+            </>
+          ) : (
+            <NavLink to={"/login"}>Login</NavLink>
+          )}
+        </div>
       </div>
     </AppBar>
   );
