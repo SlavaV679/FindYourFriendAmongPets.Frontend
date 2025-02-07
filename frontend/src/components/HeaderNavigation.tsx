@@ -21,6 +21,9 @@ export default function HeaderNavigation() {
           <NavLink className="text-xl" to={"/helpanimals"}>
             Help animals
           </NavLink>
+          <NavLink className="text-xl" to={"/upload"}>
+            Upload files
+          </NavLink>
         </div>
 
         <div className="flex flex-row gap-3">
