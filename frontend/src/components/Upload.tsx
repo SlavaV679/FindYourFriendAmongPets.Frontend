@@ -9,14 +9,24 @@ export function Upload() {
   const handleFileChange = async (file: File) => {
     const {
       data: { key, uploadId },
-    } = await FilesService.startMultipart(file.name, file.type, file.size);
+    } = await FilesService.startMultipart(
+      file.name,
+      "files",
+      "prefix",
+      file.type,
+      file.size
+    );
     const chunkSize = 10 * 1024 * 1024; // 10 MB
     const parts: PartETagInfo[] = [];
     let partNumber = 1;
     for (let start = 0; start < file.size; start += chunkSize) {
       const chunk = file.slice(start, start + chunkSize);
       const { data } = await FilesService.getPresignedUrl(
+        file.name,
         key,
+        "files",
+        "prefix",
+        file.type,
         uploadId,
         partNumber
       );
@@ -25,7 +35,15 @@ export function Upload() {
       parts.push({ partNumber, eTag });
       partNumber++;
     }
-    const response = await FilesService.completeMultipart(key, uploadId, parts);
+    const response = await FilesService.completeMultipart(
+      file.name,
+      key,
+      "files",
+      "prefix",
+      file.type,
+      uploadId,
+      parts
+    );
     alert(`Upload complete! + ${response.data.location}`);
   };
   return (
