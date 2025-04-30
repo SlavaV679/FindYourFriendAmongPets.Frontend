@@ -27,6 +27,9 @@ export default function HeaderNavigation() {
           <NavLink className="text-xl" to={"/download"}>
             Download files
           </NavLink>
+          <NavLink className="text-xl" to={"/delete"}>
+            Delete file
+          </NavLink>
         </div>
 
         <div className="flex flex-row gap-3">

@@ -8,6 +8,7 @@ import { LoginPage } from "../pages/login/LoginPage";
 import { ProfilePage } from "../pages/profile/profile";
 import { Upload } from "./Upload";
 import { Download } from "./Download";
+import { FileDelete } from "./Delete";
 
 export const Router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const Router = createBrowserRouter([
       {
         path: "download",
         element: <Download />,
+      },
+      {
+        path: "delete",
+        element: <FileDelete />,
       },
     ],
     errorElement: <div>Handling error. </div>,

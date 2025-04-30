@@ -27,12 +27,15 @@ export type FileDTO = {
 const getXDaysBeforeDateTimeLocal = (daysBefore: number): string => {
   const now = new Date();
 
+  const targetDate = new Date(now);
+  targetDate.setDate(now.getDate() - daysBefore);
+
   // Приводим к формату YYYY-MM-DDTHH:MM
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate() - daysBefore).padStart(2, "0");
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const year = targetDate.getFullYear();
+  const month = String(targetDate.getMonth() + 1).padStart(2, "0");
+  const day = String(targetDate.getDate()).padStart(2, "0");
+  const hours = String(targetDate.getHours()).padStart(2, "0");
+  const minutes = String(targetDate.getMinutes()).padStart(2, "0");
 
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
@@ -40,7 +43,7 @@ const getXDaysBeforeDateTimeLocal = (daysBefore: number): string => {
 export function Download() {
   const [files, setFiles] = useState<FileDTO[]>([]);
   const [dateFrom, setDateFrom] = useState(getXDaysBeforeDateTimeLocal(7));
-  const [dateTo, setDateTo] = useState(getXDaysBeforeDateTimeLocal(0));
+  const [dateTo, setDateTo] = useState(getXDaysBeforeDateTimeLocal(-1));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -170,7 +173,10 @@ export function Download() {
                 {file.storageInfo}
               </p>
               <p>
-                <span className="font-medium">Id:</span> {file.id}
+                <span className="font-medium">Id in MongoDb:</span> {file.id}
+              </p>
+              <p>
+                <span className="font-medium">Key in Minio:</span> {file.key}
               </p>
             </div>
           </div>

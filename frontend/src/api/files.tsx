@@ -91,4 +91,20 @@ export class FilesService {
     link.remove();
     window.URL.revokeObjectURL(url);
   }
+
+  static async deleteFileByPresignedUrl(urlForDelete: string) {
+    if (!urlForDelete) {
+      throw new Error("Ссылка для удаления недоступна");
+    }
+
+    await axios.get(urlForDelete);
+  }
+
+  static async deleteFile(fileId: string) {
+    if (!fileId) {
+      throw new Error("Не передан fileId");
+    }
+
+    await axios.get(`http://localhost:5042/files/${fileId}/delete`);
+  }
 }
